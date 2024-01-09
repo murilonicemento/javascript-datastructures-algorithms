@@ -278,5 +278,112 @@ let copyArray = [1, 2, 3, 4, 5, 6];
 
 copyArray.copyWithin(0, 3); // [4,5,6,4,5,6]
 
-opyArray = [1, 2, 3, 4, 5, 6];
+copyArray = [1, 2, 3, 4, 5, 6];
 copyArray.copyWithin(1, 3, 5); // [1,4,5,4,5,6]
+
+// ? Ordenando elementos
+
+// ! No método reverse o último item será o primeiro e vice-versa
+numbers.reverse();
+numbers.sort();
+numbers.sort((a, b) => a - b);
+
+function compare(a, b) {
+  if (a < b) return -1;
+  if (a > b) return 1;
+  return 0;
+}
+
+numbers.sort(compare);
+
+// ? Ordenação personalizada
+
+const friends = [
+  {
+    name: "John",
+    age: 30
+  },
+  {
+    name: "Ana",
+    age: 20
+  },
+  {
+    name: "Chris",
+    age: 25
+  },
+];
+
+// ? Ordenando strings
+
+const names = ["Ana", "ana", "john", "John"];
+
+console.log(names.sort((a, b) => {
+  if (a.toLowerCase() < b.toLowerCase()) return -1;
+  if (a.toLowerCase() > b.toLowerCase()) return 1;
+  return 0;
+}));
+
+names.sort((a, b) => a.localeCompare(b));
+
+// ? Pesquisa
+
+/**
+ * ! o método indexOf, que devolve o índice do primeiro elemento correspondente ao argumento passado, e lastIndexOf,
+ * ! que devolve o índice do último elemento encontrado, correspondente ao argumento passado
+ */
+
+console.log(numbers.indexOf(10));
+console.log(numbers.lastIndexOf(100));
+
+// ? ECMAScript 2015 – os métodos find e findIndex
+
+/**
+ * ! A diferença entre find e findIndex é que o método find devolve o primeiro 
+ * ! valor do array que satisfaça a condição proposta. O método findIndex, por 
+ * ! outro lado, devolve o índice do primeiro valor do array que satisfaça a 
+ * ! condição. Caso o valor não seja encontrado, undefined será devolvido.
+ */
+
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+
+function multipleOf13(element, index, array) {
+  return element % 13 === 0;
+}
+
+console.log(numbers.find(multipleOf13));
+console.log(numbers.findIndex(multipleOf13));
+
+// ? ECMAScript 2016 – usando o método includes
+
+// ! O método includes devolve true caso um elemento seja encontrado no array, e false caso contrário
+
+console.log(numbers.includes(15));
+console.log(numbers.includes(20));
+
+// * Índice de início
+
+console.log(numbers.includes(4, 5));
+
+// ? Convertendo um array em uma string
+
+console.log(numbers.toString());
+
+const numbersString = numbers.join("-");
+
+console.log(numbersString);
+
+// ? Classe TypedArray
+
+// ! TypedArray foi criado para que pudéssemos trabalhar com arrays contendo um único tipo de dado.
+
+let length = 5;
+let int16 = new Int16Array(length);
+let array16 = [];
+array16.length = length;
+
+for (let i = 0; i < length; i++) {
+  int16[i] = i + 1;
+}
+
+console.log(int16);
+
