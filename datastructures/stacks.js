@@ -11,7 +11,7 @@ const items = new WeakMap();
 class Stack {
   constructor() {
     this._count = 0;
-    this.items = {};
+    this._items = {};
   }
 
   push(element) {
@@ -69,11 +69,11 @@ console.log("Is Empty:", stack.isEmpty());
 stack.push(5);
 stack.push(8);
 
-let objectSymbols = Object.getOwnPropertySymbols(stack);
-console.log(objectSymbols.length);
-console.log(objectSymbols);
-console.log(objectSymbols[0]);
-stack[objectSymbols[0]].push(1);
+// let objectSymbols = Object.getOwnPropertySymbols(stack);
+// console.log(objectSymbols.length);
+// console.log(objectSymbols);
+// console.log(objectSymbols[0]);
+// stack[objectSymbols[0]].push(1);
 
 console.log("Peek:", stack.peek());
 
@@ -88,3 +88,28 @@ stack.pop();
 stack.pop();
 
 console.log("Size:", stack.size());
+
+/****************************************************CONVERTENDO DECIMAIS PARA BINÁRIOS************************************************** */
+
+function decimalToBinary(decNumber) {
+  const remStack = new Stack();
+  let number = decNumber;
+  let rem;
+  let binaryString = "";
+
+  while (number > 0) {
+    rem = Math.floor(number % 2);
+    remStack.push(rem);
+    number = Math.floor(number / 2);
+  }
+
+  while (!remStack.isEmpty()) {
+    binaryString += remStack.pop().toString();
+  }
+
+  return binaryString;
+}
+
+console.log(decimalToBinary(233));
+console.log(decimalToBinary(10));
+console.log(decimalToBinary(1000));
