@@ -7,15 +7,15 @@
 * • clear(): esse método remove todos os elementos da pilha.
 * • size(): esse método devolve o número de elementos contidos na pilha. É semelhante à propriedade length de um array.
  */
-
+const _items = Symbol("stackItems");
 class Stack {
   constructor() {
     this._count = 0;
-    this._items = {};
+    this[_items] = [];
   }
 
   push(element) {
-    this._items[this._count] = element;
+    this[_items][this._count] = element;
     this._count++;
   }
 
@@ -23,15 +23,15 @@ class Stack {
     if (this.isEmpty()) return undefined;
 
     this._count--;
-    const result = this._items[this._count];
-    delete this._items[this._count];
+    const result = this[_items][this._count];
+    delete this[_items][this._count];
     return result;
   }
 
   peek() {
     if (this.isEmpty()) return undefined;
 
-    return this._items[this._count - 1];
+    return this[_items][this._count - 1];
   }
 
   isEmpty() {
@@ -43,17 +43,17 @@ class Stack {
   }
 
   clear() {
-    this._items = {};
+    this[_items] = {};
     this._count = 0;
   }
 
   toString() {
     if (this.isEmpty()) return "";
 
-    let objString = `${this._items[0]}`;
+    let objString = `${this[_items][0]}`;
 
     for (let i = 1; i < this._count; i++) {
-      objString = `${objString}, ${this._items[i]}`;
+      objString = `${objString}, ${this[_items][i]}`;
     }
 
     return objString;
@@ -65,6 +65,12 @@ console.log("Is Empty:", stack.isEmpty());
 
 stack.push(5);
 stack.push(8);
+
+let objectSymbols = Object.getOwnPropertySymbols(stack);
+console.log(objectSymbols.length);
+console.log(objectSymbols);
+console.log(objectSymbols[0]);
+stack[objectSymbols[0]].push(1);
 
 console.log("Peek:", stack.peek());
 
