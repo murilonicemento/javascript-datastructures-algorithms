@@ -10,31 +10,53 @@
 
 class Stack {
   constructor() {
-    this.items = [];
+    this._count = 0;
+    this._items = {};
   }
 
   push(element) {
-    this.items.push(element);
+    this._items[this._count] = element;
+    this._count++;
   }
 
   pop() {
-    return this.items.pop();
+    if (this.isEmpty()) return undefined;
+
+    this._count--;
+    const result = this._items[this._count];
+    delete this._items[this._count];
+    return result;
   }
 
   peek() {
-    return this.items[this.items.length - 1];
+    if (this.isEmpty()) return undefined;
+
+    return this._items[this._count - 1];
   }
 
   isEmpty() {
-    return this.items.length === 0;
+    return this._count === 0;
   }
 
   size() {
-    return this.items.length;
+    return this._count;
   }
 
   clear() {
-    this.items = [];
+    this._items = {};
+    this._count = 0;
+  }
+
+  toString() {
+    if (this.isEmpty()) return "";
+
+    let objString = `${this._items[0]}`;
+
+    for (let i = 1; i < this._count; i++) {
+      objString = `${objString}, ${this._items[i]}`;
+    }
+
+    return objString;
   }
 }
 
