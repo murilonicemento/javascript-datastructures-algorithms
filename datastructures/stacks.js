@@ -7,7 +7,6 @@
 * • clear(): esse método remove todos os elementos da pilha.
 * • size(): esse método devolve o número de elementos contidos na pilha. É semelhante à propriedade length de um array.
  */
-const items = new WeakMap();
 class Stack {
   constructor() {
     this._count = 0;
