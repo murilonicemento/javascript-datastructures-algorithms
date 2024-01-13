@@ -1,12 +1,12 @@
 /**
  * • push(element(s)): esse método adiciona um novo elemento (ou vários elementos) no topo da pilha.
  * • pop(): esse método remove o elemento que está no topo da pilha. Também devolve o elemento removido.
- * • peek(): esse método devolve o elemento que está no topo da pilha. A pilha não é modificada 
-  (o elemento não é removido; ele é devolvido apenas como informação).
-* • isEmpty(): esse método devolve true se a pilha não contiver nenhum elemento e false se o tamanho da pilha for maior que 0.
-* • clear(): esse método remove todos os elementos da pilha.
-* • size(): esse método devolve o número de elementos contidos na pilha. É semelhante à propriedade length de um array.
+ * • peek(): esse método devolve o elemento que está no topo da pilha. A pilha não é modificada  (o elemento não é removido; ele é devolvido apenas como informação).
+ * • isEmpty(): esse método devolve true se a pilha não contiver nenhum elemento e false se o tamanho da pilha for maior que 0.
+ * • clear(): esse método remove todos os elementos da pilha.
+ * • size(): esse método devolve o número de elementos contidos na pilha. É semelhante à propriedade length de um array.
  */
+
 class Stack {
   constructor() {
     this._count = 0;
