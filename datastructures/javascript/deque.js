@@ -67,4 +67,31 @@ class Deque {
 
     return this.items[this.count - 1];
   }
+
+  isEmpty() {
+    // return this.size() === 0;
+    return this.count - this.lowestCount === 0;
+  }
+
+  size() {
+    return this.count - this.lowestCount;
+  }
+
+  clear() {
+    this.count = 0;
+    this.lowestCount = 0;
+    this.items = {};
+  }
+
+  toString() {
+    if (this.isEmpty()) return "";
+
+    let objString = `${this.items[this.lowestCount]}`;
+
+    for (let i = this.lowestCount + 1; i < this.count; i++) {
+      objString = `${objString}, ${this.items[i]}`;
+    }
+
+    return objString;
+  }
 }
