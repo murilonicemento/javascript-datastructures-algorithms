@@ -1,7 +1,18 @@
-import { defaultEquals } from '../util';
-import { Node } from './models/linked-list-models';
+// import { defaultEquals } from '../util';
+// import { Node } from './models/linked-list-models';
 
-export default class LinkedList {
+function defaultEquals(a, b) {
+  return a === b;
+}
+
+class Node {
+  constructor(element, next) {
+    this.element = element;
+    this.next = next;
+  }
+}
+
+class LinkedList {
   constructor(equalsFn = defaultEquals) {
     this.equalsFn = equalsFn;
     this.count = 0;
@@ -9,109 +20,64 @@ export default class LinkedList {
   }
 
   push(element) {
-    const node = new Node(element);
-    let current;
-    if (this.head == null) {
-      // catches null && undefined
+    const node = new Node(element); // {1}
+    let current; // {2}
+    if (this.head == null) { // {3}
       this.head = node;
     } else {
-      current = this.head;
-      while (current.next != null) {
+      current = this.head; // {4}
+      while (current.next != null) { // {5} obtém o último item
         current = current.next;
       }
-      current.next = node;
+      // e atribui o novo elemento a next para criar a ligação
+      current.next = node; // {6}
     }
-    this.count++;
-  }
-
-  getElementAt(index) {
-    if (index >= 0 && index <= this.count) {
-      let node = this.head;
-      for (let i = 0; i < index && node != null; i++) {
-        node = node.next;
-      }
-      return node;
-    }
-    return undefined;
-  }
-
-  insert(element, index) {
-    if (index >= 0 && index <= this.count) {
-      const node = new Node(element);
-      if (index === 0) {
-        const current = this.head;
-        node.next = current;
-        this.head = node;
-      } else {
-        const previous = this.getElementAt(index - 1);
-        node.next = previous.next;
-        previous.next = node;
-      }
-      this.count++;
-      return true;
-    }
-    return false;
+    this.count++; // {7}
   }
 
   removeAt(index) {
-    if (index >= 0 && index < this.count) {
-      let current = this.head;
-      if (index === 0) {
+    // verifica valores fora do intervalo
+    if (index >= 0 && index < this.count) { // {1}
+      let current = this.head; // {2}
+      // remove o primeiro item
+      if (index === 0) { // {3}
         this.head = current.next;
       } else {
         const previous = this.getElementAt(index - 1);
         current = previous.next;
-        previous.next = current.next;
+        // let previous; // {4}
+        // for (let i = 0; i < index; i++) { // {5}
+        //   previous = current; // {6}
+        //   current = current.next; // {7}
+        // }
+        // faz a ligação de previous com o next de current: pula esse elemento para removê-lo
+        previous.next = current.next; // {8}
       }
-      this.count--;
+      this.count--; // {9}
       return current.element;
     }
-    return undefined;
+    return undefined; // {10}
   }
 
-  remove(element) {
-    const index = this.indexOf(element);
-    return this.removeAt(index);
-  }
+  getElementAt(index) {
+    if (index >= 0 && index <= this.count) { // {1}
+      let node = this.head; // {2}
 
-  indexOf(element) {
-    let current = this.head;
-    for (let i = 0; i < this.size() && current != null; i++) {
-      if (this.equalsFn(element, current.element)) {
-        return i;
+      for (let i = 0; i < index && node != null; i++) { // {3}
+        node = node.next;
       }
-      current = current.next;
+      return node; // {4}
     }
-    return -1;
-  }
-
-  isEmpty() {
-    return this.size() === 0;
-  }
-
-  size() {
-    return this.count;
-  }
-
-  getHead() {
-    return this.head;
-  }
-
-  clear() {
-    this.head = undefined;
-    this.count = 0;
-  }
-
-  toString() {
-    if (this.head == null) {
-      return '';
-    }
-    let objString = `${this.head.element}`;
-    let current = this.head.next;
-    for (let i = 1; i < this.size() && current != null; i++) {
-      objString = `${objString},${current.element}`;
-      current = current.next;
-    }
-    return objString;
+    return undefined; // {5}
   }
 }
+
+const list = new LinkedList();
+
+list.push(15);
+list.push(10);
+list.push(13);
+list.push(11);
+list.push(12);
+
+console.log(list.head);
