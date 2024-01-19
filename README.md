@@ -20,3 +20,4 @@ Certifique-se de ter o ambiente de desenvolvimento configurado conforme as instr
 
 Loiane Groner
 
+Nome do Repositório Remoto é: loianeRepo
