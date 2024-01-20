@@ -135,10 +135,29 @@ class LinkedList {
 
 const list = new LinkedList();
 
+console.log(list.isEmpty());
+
 list.push(15);
 list.push(10);
 list.push(13);
 list.push(11);
 list.push(12);
 
-console.log(list.head);
+console.log(list.toString());
+console.log(list.getElementAt(3));
+console.log(list.indexOf(13));
+
+list.insert(27, 5);
+
+console.log(list.getHead());
+console.log(list.isEmpty());
+
+list.push(5);
+list.remove(12);
+
+console.log(list.toString());
+
+list.removeAt(2);
+console.log(list.size());
+
+console.log(list.toString());
