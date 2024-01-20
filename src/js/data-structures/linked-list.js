@@ -91,15 +91,14 @@ class LinkedList {
   }
 
   indexOf(element) {
-    let current = this.head;
-    for (let i = 0; i < this.count && this.count != null; i++) {
-      if (this.equalsFn(element, current.element)) {
-        return i;
+    let current = this.head; // {1}
+    for (let i = 0; i < this.count && this.count != null; i++) { // {2}
+      if (this.equalsFn(element, current.element)) { // {3}
+        return i; // {4}
       }
-      current = current.next;
+      current = current.next; // {5}
     }
-
-    return -1;
+    return -1; // {6}
   }
 }
 
