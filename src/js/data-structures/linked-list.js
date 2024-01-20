@@ -100,6 +100,37 @@ class LinkedList {
     }
     return -1; // {6}
   }
+
+  remove(element) {
+    const index = this.indexOf(element);
+    return this.removeAt(index);
+  }
+
+  size() {
+    return this.count;
+  }
+
+  isEmpty() {
+    return this.size() === 0;
+  }
+
+  getHead() {
+    return this.head;
+  }
+
+  toString() {
+    if (this.head == null) return ''; // {1}
+
+    let objString = `${this.head.element}`; // {2}
+    let current = this.head.next; // {3}
+
+    for (let i = 1; i < this.size() && current != null; i++) { // {4}
+      objString = `${objString}, ${current.element}`;
+      current = current.next;
+    }
+
+    return objString; // {5}
+  }
 }
 
 const list = new LinkedList();
