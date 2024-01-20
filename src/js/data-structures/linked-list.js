@@ -70,6 +70,37 @@ class LinkedList {
     }
     return undefined; // {5}
   }
+
+  insert(element, index) {
+    if (index >= 0 && index <= this.count) { // {1}
+      const node = new Node(element);
+      if (index === 0) { // adiciona na primeira posição
+        const current = this.head;
+        node.next = current; // {2}
+        this.head = node;
+      } else {
+        const previous = this.getElementAt(index - 1); // {3}
+        const current = previous.next; // {4}
+        node.next = current; // {5}
+        previous.next = node; // {6}
+      }
+      this.count++; // atualiza o tamanho da lista
+      return true;
+    }
+    return false; // {7}
+  }
+
+  indexOf(element) {
+    let current = this.head;
+    for (let i = 0; i < this.count && this.count != null; i++) {
+      if (this.equalsFn(element, current.element)) {
+        return i;
+      }
+      current = current.next;
+    }
+
+    return -1;
+  }
 }
 
 const list = new LinkedList();
