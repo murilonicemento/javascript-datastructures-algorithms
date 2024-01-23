@@ -173,11 +173,11 @@ class CircularLinkedList extends LinkedList {
         if (this.size() === 1) {
           this.head = undefined;
         } else {
-          const removed = this.head;
-          current = this.getElementAt(this.size());
-          this.head = this.head.next;
-          current.next = this.head;
-          current = removed;
+          const removed = this.head; // {1}
+          current = this.getElementAt(this.size()); // {2} NOVO
+          this.head = this.head.next; // {3}
+          current.next = this.head; // {4}
+          current = removed; // {5}
         }
       } else {
         // não há necessidade de atualizar o último elemento da lista circular
@@ -186,7 +186,7 @@ class CircularLinkedList extends LinkedList {
         previous.next = current.next;
       }
       this.count--;
-      return current.element;
+      return current.element; // {6}
     }
 
     return undefined;
