@@ -140,6 +140,20 @@ class DoublyLinkedList extends LinkedList {
     this.tail = undefined; // NOVO
   }
 
+  push(element) {
+    const node = new DoublyNode(element);
+    if (this.head == null) {
+      this.head = node;
+      this.tail = node; // NOVO
+    } else {
+      // Anexar ao nó final // NOVO
+      this.tail.next = node;
+      node.prev = this.tail;
+      this.tail = node;
+    }
+    this.count++;
+  }
+
   insert(element, index) {
     if (index >= 0 && index <= this.count) {
       const node = new DoublyNode(element);
@@ -199,6 +213,60 @@ class DoublyLinkedList extends LinkedList {
     }
 
     return undefined;
+  }
+
+  indexOf(element) {
+    let current = this.head;
+    let index = 0;
+    while (current != null) {
+      if (this.equalsFn(element, current.element)) {
+        return index;
+      }
+      index++;
+      current = current.next;
+    }
+    return -1;
+  }
+
+  getHead() {
+    return this.head;
+  }
+
+  getTail() {
+    return this.tail;
+  }
+
+  clear() {
+    super.clear();
+    this.tail = undefined;
+  }
+
+  toString() {
+    if (this.head == null) return '';
+
+    let objString = `${this.head.element}`;
+    let current = this.head.next;
+
+    while (current != null) {
+      objString = `${objString},${current.element}`;
+      current = current.next;
+    }
+
+    return objString;
+  }
+
+  inverseToString() {
+    if (this.tail == null) return '';
+
+    let objString = `${this.tail.element}`;
+    let previous = this.tail.prev;
+
+    while (previous != null) {
+      objString = `${objString},${previous.element}`;
+      previous = previous.prev;
+    }
+
+    return objString;
   }
 }
 
