@@ -133,6 +133,7 @@ class DoublyNode extends Node {
     this.prev = prev; // NOVO
   }
 }
+
 class DoublyLinkedList extends LinkedList {
   constructor(equalsFn = defaultEquals) {
     super(equalsFn);
@@ -169,6 +170,35 @@ class DoublyLinkedList extends LinkedList {
       return true;
     }
     return false;
+  }
+
+  removeAt(index) {
+    if (index >= 0 && index < this.count) {
+      let current = this.head;
+      if (index === 0) {
+        this.head = current.next; // {1}
+        // se houver apenas um item, atualizamos tail também – NOVO
+        if (this.count === 1) { // {2}
+          this.tail = undefined;
+        } else {
+          this.head.prev = undefined; // {3}
+        }
+      } else if (index === this.count - 1) { // último item – NOVO
+        current = this.tail; // {4}
+        this.tail = current.prev; // {5}
+        this.tail.next = undefined; // {6}
+      } else {
+        current = this.getElementAt(index); // {7}
+        const previous = current.prev; // {8}
+        // faz a ligação de previous com o next de current – pula esse elemento para removê-lo
+        previous.next = current.next; // {9}
+        current.next.prev = previous; // {10} NOVO
+      }
+      this.count--;
+      return current.element;
+    }
+
+    return undefined;
   }
 }
 
