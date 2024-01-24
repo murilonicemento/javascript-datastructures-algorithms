@@ -139,6 +139,20 @@ class CircularLinkedList extends LinkedList {
     super(equalsFn);
   }
 
+  push(element) {
+    const node = new Node(element);
+    let current;
+    if (this.head == null) {
+      this.head = node;
+    } else {
+      current = this.getElementAt(this.size() - 1);
+      current.next = node;
+    }
+    // defina node.next para head - para ter uma lista circular
+    node.next = this.head;
+    this.count++;
+  }
+
   insert(element, index) {
     if (index >= 0 && index <= this.count) {
       const node = new Node(element);
