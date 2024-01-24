@@ -1,93 +1,84 @@
-export default class Set {
+/**
+ * • add(element): adiciona um novo element ao conjunto.
+ * • delete(element): remove element do conjunto.
+ * • has(element): devolve true se element estiver no conjunto, e false caso contrário.
+ * • clear(): remove todos os elementos do conjunto.
+ * • size(): devolve quantos elementos estão contidos no conjunto.
+ É semelhante à propriedade length de um array.
+ * • values(): devolve um array com todos os valores (elementos) que estão no conjunto.
+ */
+class Set {
   constructor() {
     this.items = {};
-  }
-
-  add(element) {
-    if (!this.has(element)) {
-      this.items[element] = element;
-      return true;
-    }
-    return false;
-  }
-
-  delete(element) {
-    if (this.has(element)) {
-      delete this.items[element];
-      return true;
-    }
-    return false;
   }
 
   has(element) {
     return Object.prototype.hasOwnProperty.call(this.items, element);
   }
 
-  values() {
-    return Object.values(this.items);
-  }
-
-  union(otherSet) {
-    const unionSet = new Set();
-    this.values().forEach(value => unionSet.add(value));
-    otherSet.values().forEach(value => unionSet.add(value));
-    return unionSet;
-  }
-
-  intersection(otherSet) {
-    const intersectionSet = new Set();
-    const values = this.values();
-    const otherValues = otherSet.values();
-    let biggerSet = values;
-    let smallerSet = otherValues;
-    if (otherValues.length - values.length > 0) {
-      biggerSet = otherValues;
-      smallerSet = values;
+  add(element) {
+    if (!this.has(element)) {
+      this.items[element] = element; // {1}
+      return true;
     }
-    smallerSet.forEach(value => {
-      if (biggerSet.includes(value)) {
-        intersectionSet.add(value);
-      }
-    });
-    return intersectionSet;
+
+    return false;
   }
 
-  difference(otherSet) {
-    const differenceSet = new Set();
-    this.values().forEach(value => {
-      if (!otherSet.has(value)) {
-        differenceSet.add(value);
-      }
-    });
-    return differenceSet;
-  }
+  delete(element) {
+    if (this.has(element)) {
+      delete this.items[element]; // {1}
+      return true;
+    }
 
-  isSubsetOf(otherSet) {
-    const values = this.values();
-    return values.every((value) => otherSet.has(value));
-  }
-
-  isEmpty() {
-    return this.size() === 0;
-  }
-
-  size() {
-    return Object.keys(this.items).length;
+    return false;
   }
 
   clear() {
     this.items = {};
   }
 
-  toString() {
-    if (this.isEmpty()) {
-      return '';
-    }
-    const values = this.values();
-    let objString = `${values[0]}`;
-    for (let i = 1; i < values.length; i++) {
-      objString = `${objString},${values[i].toString()}`;
-    }
-    return objString;
+  size() {
+    return Object.keys(this.items).length;
+    // let count = 0;
+
+    // for (const key in this.items) {
+    //   if (this.items.hasOwnProperty(key)) count++;
+    // }
+
+    // return count;
+  }
+
+  values() {
+    return Object.values(this.items);
+    // let values = [];
+
+    // for (let key in this.items) {
+    //   if (this.items.hasOwnProperty(key)) values.push(key);
+    // }
+
+    // return values;
   }
 }
+
+const set = new Set();
+
+set.add(1);
+
+console.log(set.values()); // exibe [1]
+console.log(set.has(1)); // exibe true
+console.log(set.size()); // exibe 1
+
+set.add(2);
+
+console.log(set.values()); // exibe [1, 2]
+console.log(set.has(2)); // true
+console.log(set.size()); // 2
+
+set.delete(1);
+
+console.log(set.values()); // exibe [2]
+
+set.delete(2);
+
+console.log(set.values()); // exibe []
