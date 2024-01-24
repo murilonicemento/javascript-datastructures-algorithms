@@ -6,6 +6,13 @@ function defaultEquals(a, b) {
   return a === b;
 }
 
+class Node {
+  constructor(element, next) {
+    this.element = element;
+    this.next = next;
+  }
+}
+
 class LinkedList {
   constructor(equalsFn = defaultEquals) {
     this.equalsFn = equalsFn;
