@@ -59,6 +59,45 @@ class Set {
 
     // return values;
   }
+
+  union(otherSet) {
+    const unionSet = new Set(); // {1}
+
+    this.values().forEach(value => unionSet.add(value)); // {2}
+    otherSet.values().forEach(value => unionSet.add(value)); // {3}
+
+    return unionSet;
+  }
+
+  intersection(otherSet) {
+    // const intersectionSet = new Set(); // {1}
+    // const values = this.values();
+
+    // for (let i = 0; i < values.length; i++) { // {2}
+    //   if (otherSet.has(values[i])) { // {3}
+    //     intersectionSet.add(values[i]); // {4}
+    //   }
+    // }
+
+    // return intersectionSet;
+
+    const intersectionSet = new Set(); // {1}
+    const values = this.values(); // {2}
+    const otherValues = otherSet.values(); // {3}
+    let biggerSet = values; // {4}
+    let smallerSet = otherValues; // {5}
+
+    if (otherValues.length - values.length > 0) { // {6}
+      biggerSet = otherSet;
+      smallerSet = values;
+    }
+
+    smallerSet.forEach(value => { // {7}
+      if (biggerSet.includes(value)) intersectionSet.add(value);
+    });
+
+    return intersectionSet;
+  }
 }
 
 const set = new Set();
@@ -82,3 +121,24 @@ console.log(set.values()); // exibe [2]
 set.delete(2);
 
 console.log(set.values()); // exibe []
+
+const setA = new Set();
+
+setA.add(1);
+setA.add(2);
+setA.add(3);
+
+const setB = new Set();
+
+setB.add(3);
+setB.add(4);
+setB.add(5);
+setB.add(6);
+
+const unionAB = setA.union(setB);
+
+console.log(unionAB.values());
+
+const intersectionAB = setA.intersection(setB);
+
+console.log(intersectionAB.values());
