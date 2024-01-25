@@ -183,3 +183,44 @@ setC.add(4);
 
 console.log(setA.isSubsetOf(setB));
 console.log(setA.isSubsetOf(setC));
+
+/* CLASSE SET DA ES2015 */
+
+const union = (set1, set2) => {
+  const unionAb = new Set();
+  set1.forEach(value => unionAb.add(value));
+  set2.forEach(value => unionAb.add(value));
+  return unionAb;
+};
+
+console.log(union(setA, setB)); // {1, 2, 3, 4}
+
+const intersection = (set1, set2) => {
+  const intersectionSet = new Set();
+  set1.forEach(value => {
+    if (set2.has(value)) {
+      intersectionSet.add(value);
+    }
+  });
+  return intersectionSet;
+};
+
+console.log(intersection(setA, setB)); // {2, 3}
+
+const difference = (set1, set2) => {
+  const differenceSet = new Set();
+  set1.forEach(value => {
+    if (!set2.has(value)) { // {1}
+      differenceSet.add(value);
+    }
+  });
+  return differenceSet;
+};
+
+console.log(difference(setA, setB));
+// união de conjuntos
+console.log(new Set([...setA, ...setB]));
+// intersecção de conjuntos
+console.log(new Set([...setA].filter(x => setB.has(x))));
+// diferença entre conjuntos
+console.log(new Set([...setA].filter(x => !setB.has(x))));
