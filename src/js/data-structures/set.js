@@ -98,6 +98,34 @@ class Set {
 
     return intersectionSet;
   }
+
+  difference(otherSet) {
+    const differenceSet = new Set(); // {1}
+
+    this.values().forEach(value => { // {2}
+      if (!otherSet.has(value)) { // {3}
+        differenceSet.add(value); // {4}
+      }
+    });
+
+    return differenceSet;
+  }
+
+  isSubsetOf(otherSet) {
+    if (this.size() > otherSet.size()) return false; // {1}
+
+    let isSubset = true; // {2}
+
+    this.values().every(value => { // {3}
+      if (!otherSet.has(value)) { // {4}
+        isSubset = false; // {5}
+        return false;
+      }
+      return true; // {6}
+    });
+
+    return isSubset; // {7}
+  }
 }
 
 const set = new Set();
@@ -142,3 +170,16 @@ console.log(unionAB.values());
 const intersectionAB = setA.intersection(setB);
 
 console.log(intersectionAB.values());
+
+const differenceAB = setA.difference(setB);
+
+console.log(differenceAB.values());
+
+const setC = new Set();
+
+setC.add(2);
+setC.add(3);
+setC.add(4);
+
+console.log(setA.isSubsetOf(setB));
+console.log(setA.isSubsetOf(setC));
