@@ -129,6 +129,10 @@ class Dictionary {
   size() {
     return Object.keys(this.table).length;
   }
+
+  isEmpty() {
+    return this.size() === 0;
+  }
 }
 
 const dictionary = new Dictionary();
