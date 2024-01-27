@@ -63,6 +63,14 @@ class Dictionary {
     return false;
   }
 
+  remove(key) {
+    if (this.hasKey(key)) {
+      delete this.table[this.toStrFn(key)];
+      return true;
+    }
+    return false;
+  }
+
 }
 
 const dictionary = new Dictionary();
