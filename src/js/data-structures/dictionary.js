@@ -54,8 +54,20 @@ class Dictionary {
     return this.table[this.toStrFn(key)] != null;
   }
 
+  set(key, value) {
+    if (key != null && value != null) {
+      const tableKey = this.toStrFn(key); // {1}
+      this.table[tableKey] = new ValuePair(key, value); // {2}
+      return true;
+    }
+    return false;
+  }
+
 }
 
 const dictionary = new Dictionary();
 
-console.log(dictionary);
+dictionary.set(0, 10);
+dictionary.set(1, 20);
+
+console.log(dictionary.table);
