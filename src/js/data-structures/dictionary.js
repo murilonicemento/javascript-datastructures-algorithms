@@ -133,6 +133,10 @@ class Dictionary {
   isEmpty() {
     return this.size() === 0;
   }
+
+  clear() {
+    this.table = {};
+  }
 }
 
 const dictionary = new Dictionary();
