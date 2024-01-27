@@ -83,7 +83,27 @@ class Dictionary {
   }
 
   keyValues() {
-    return Object.keys(this.table);
+    return Object.values(this.table);
+
+    // const valuePairs = [];
+    // for (const k in this.table) { // {1}
+    //   if (this.hasKey(k)) {
+    //     valuePairs.push(this.table[k]); // {2}
+    //   }
+    // }
+    // return valuePairs;
+
+  }
+
+  keys() {
+    return this.keyValues().map(valuePair => valuePair.key);
+
+    // const keys = [];
+    // const valuePairs = this.keyValues();
+    // for (let i = 0; i < valuePairs.length; i++) {
+    //   keys.push(valuePairs[i].key);
+    // }
+    // return keys;
   }
 
 }
@@ -93,4 +113,4 @@ const dictionary = new Dictionary();
 dictionary.set(0, 10);
 dictionary.set(1, 20);
 
-console.log(dictionary.get(0));
+console.log(dictionary.keyValues());
