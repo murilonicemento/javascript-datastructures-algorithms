@@ -80,7 +80,10 @@ class Dictionary {
     //   return this.table[this.toStrFn(key)];
     // }
     // return undefined;
+  }
 
+  keyValues() {
+    return Object.keys(this.table);
   }
 
 }
