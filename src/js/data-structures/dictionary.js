@@ -71,6 +71,18 @@ class Dictionary {
     return false;
   }
 
+  get(key) {
+    const valuePair = this.table[this.toStrFn(key)]; // {1}
+
+    return valuePair == null ? undefined : valuePair.value; // {2}
+
+    // if (this.hasKey(key)) {
+    //   return this.table[this.toStrFn(key)];
+    // }
+    // return undefined;
+
+  }
+
 }
 
 const dictionary = new Dictionary();
@@ -78,4 +90,4 @@ const dictionary = new Dictionary();
 dictionary.set(0, 10);
 dictionary.set(1, 20);
 
-console.log(dictionary.table);
+console.log(dictionary.get(0));
