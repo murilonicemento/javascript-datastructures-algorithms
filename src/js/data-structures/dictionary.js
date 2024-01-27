@@ -137,11 +137,40 @@ class Dictionary {
   clear() {
     this.table = {};
   }
+
+  toString() {
+    if (this.isEmpty()) return '';
+
+    const valuesPair = this.keyValues();
+    let objString = `${valuesPair[0].toString()}`; // {1}
+
+    for (let i = 1; i < valuesPair.length; i++) {
+      objString = `${objString}, ${valuesPair[i].toString}`; // {2}
+    }
+
+    return objString; // {3}
+  }
 }
 
 const dictionary = new Dictionary();
 
-dictionary.set(0, 10);
-dictionary.set(1, 20);
+dictionary.set('Gandalf', 'gandalf@email.com');
+dictionary.set('John', 'johnsnow@email.com');
+dictionary.set('Tyrion', 'tyrion@email.com');
 
+console.log(dictionary.hasKey('Gandalf'));
+
+console.log(dictionary.size());
+console.log(dictionary.keys());
+console.log(dictionary.values());
+console.log(dictionary.get('Tyrion'));
+
+dictionary.remove('John');
+
+console.log(dictionary.keys());
+console.log(dictionary.values());
 console.log(dictionary.keyValues());
+
+dictionary.forEach((key, value) => {
+  console.log('forEach: ', `key: ${key}, value: ${value}`);
+});
