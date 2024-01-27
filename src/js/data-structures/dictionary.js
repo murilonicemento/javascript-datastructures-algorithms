@@ -106,6 +106,16 @@ class Dictionary {
     // return keys;
   }
 
+  values() {
+    return this.keyValues().map(valuePair => valuePair.value);
+
+    // const values = [];
+    // const valuePairs = this.keyValues();
+    // for (let i = 0; i < valuePairs.length; i++) {
+    //   keys.push(valuePairs[i].value);
+    // }
+    // return values;
+  }
 }
 
 const dictionary = new Dictionary();
