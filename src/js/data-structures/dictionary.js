@@ -125,6 +125,10 @@ class Dictionary {
       if (result === false) break; // {4}
     }
   }
+
+  size() {
+    return Object.keys(this.table).length;
+  }
 }
 
 const dictionary = new Dictionary();
