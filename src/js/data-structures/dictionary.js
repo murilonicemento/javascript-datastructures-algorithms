@@ -116,6 +116,15 @@ class Dictionary {
     // }
     // return values;
   }
+
+  forEach(callbackFn) {
+    const valuePairs = this.keyValues(); // {1}
+
+    for (let i = 0; i < valuePairs.length; i++) { // {2}
+      const result = callbackFn(valuePairs[i].key, valuePairs[i].value); // {3}
+      if (result === false) break; // {4}
+    }
+  }
 }
 
 const dictionary = new Dictionary();
