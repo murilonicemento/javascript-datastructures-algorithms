@@ -79,6 +79,27 @@ class HashTable {
     }
     return false;
   }
+
+  size() {
+    return Object.keys(this.table).length;
+  }
+
+  isEmpty() {
+    return this.size() === 0;
+  }
+
+  toString() {
+    if (this.isEmpty()) return '';
+
+    const keys = Object.keys(this.table);
+    let objString = `${keys[0]} => ${this.table[keys[0].toString()]}`;
+
+    for (let i = 1; i < keys.length; i++) {
+      objString += `${keys[i]} => ${this.table[keys[i].toString()]}`;
+    }
+
+    return objString;
+  }
 }
 
 const hashTable = new HashTable();
@@ -96,3 +117,15 @@ console.log(hashTable.get('Loiane')); // undefined
 hashTable.remove('Gandalf');
 
 console.log(hashTable.get('Gandalf'));
+
+hashTable.put('Ygritte', 'ygritte@email.com');
+hashTable.put('Jonathan', 'jonathan@email.com');
+hashTable.put('Jamie', 'jamie@email.com');
+hashTable.put('Jack', 'jack@email.com');
+hashTable.put('Jasmine', 'jasmine@email.com');
+hashTable.put('Jake', 'jake@email.com');
+hashTable.put('Nathan', 'nathan@email.com');
+hashTable.put('Athelstan', 'athelstan@email.com');
+hashTable.put('Sue', 'sue@email.com');
+hashTable.put('Aethelwulf', 'aethelwulf@email.com');
+hashTable.put('Sargeras', 'sargeras@email.com');
