@@ -88,6 +88,14 @@ class HashTable {
     return this.size() === 0;
   }
 
+  getTable() {
+    return this.table;
+  }
+
+  clear() {
+    this.table = {};
+  }
+
   toString() {
     if (this.isEmpty()) return '';
 
