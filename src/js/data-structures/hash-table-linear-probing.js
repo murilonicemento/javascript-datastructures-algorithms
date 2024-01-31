@@ -1,7 +1,29 @@
-import { defaultToString } from '../util';
-import { ValuePair } from './models/value-pair';
+// import { defaultToString } from '../util';
+// import { ValuePair } from './models/value-pair';
 
-export default class HashTableLinearProbing {
+function defaultToString(item) {
+  if (item === null) {
+    return 'NULL';
+  } if (item === undefined) {
+    return 'UNDEFINED';
+  } if (typeof item === 'string' || item instanceof String) {
+    return `${item}`;
+  }
+  return item.toString();
+}
+
+class ValuePair {
+  constructor(key, value) {
+    this.key = key;
+    this.value = value;
+  }
+
+  toString() {
+    return `[#${this.key}: ${this.value}]`;
+  }
+}
+
+class HashTableLinearProbing {
   constructor(toStrFn = defaultToString) {
     this.toStrFn = toStrFn;
     this.table = {};
@@ -26,70 +48,45 @@ export default class HashTableLinearProbing {
   put(key, value) {
     if (key != null && value != null) {
       const position = this.hashCode(key);
-      if (this.table[position] == null) {
-        this.table[position] = new ValuePair(key, value);
+
+      if (this.table[position] == null) { // {1}
+        this.table[position] = new ValuePair(key, value); // {2}
       } else {
-        let index = position + 1;
-        while (this.table[index] != null) {
-          index++;
+        let index = position + 1; // {3}
+
+        while (index != null) { // {4}
+          index++; // {5}
         }
-        this.table[index] = new ValuePair(key, value);
+
+        this.table[index] = new ValuePair(key, value); // {6}
       }
+
       return true;
     }
+
     return false;
   }
 
   get(key) {
     const position = this.hashCode(key);
-    if (this.table[position] != null) {
-      if (this.table[position].key === key) {
-        return this.table[position].value;
+
+    if (this.table[position] != null) { // {1}
+      if (this.table[position].key === key) { // {2}
+        return this.table[position].value; // {3}
       }
-      let index = position + 1;
-      while (this.table[index] != null && this.table[index].key !== key) {
+
+      let index = position + 1; // {4}
+
+      while (this.table[index] != null && this.table[index].key !== key) { // {5}
         index++;
       }
-      if (this.table[index] != null && this.table[index].key === key) {
-        return this.table[position].value;
-      }
-    }
-    return undefined;
-  }
 
-  remove(key) {
-    const position = this.hashCode(key);
-    if (this.table[position] != null) {
-      if (this.table[position].key === key) {
-        delete this.table[position];
-        this.verifyRemoveSideEffect(key, position);
-        return true;
-      }
-      let index = position + 1;
-      while (this.table[index] != null && this.table[index].key !== key) {
-        index++;
-      }
-      if (this.table[index] != null && this.table[index].key === key) {
-        delete this.table[index];
-        this.verifyRemoveSideEffect(key, index);
-        return true;
+      if (this.table[index] != null && this.table[index].key === key) { // {6}
+        return this.table[index].value; // {7}
       }
     }
-    return false;
-  }
 
-  verifyRemoveSideEffect(key, removedPosition) {
-    const hash = this.hashCode(key);
-    let index = removedPosition + 1;
-    while (this.table[index] != null) {
-      const posHash = this.hashCode(this.table[index].key);
-      if (posHash <= hash || posHash <= removedPosition) {
-        this.table[removedPosition] = this.table[index];
-        delete this.table[index];
-        removedPosition = index;
-      }
-      index++;
-    }
+    return undefined; // {8}
   }
 
   isEmpty() {
@@ -122,3 +119,7 @@ export default class HashTableLinearProbing {
     return objString;
   }
 }
+
+const hashTable = new HashTableLinearProbing();
+
+console.log(hashTable);
