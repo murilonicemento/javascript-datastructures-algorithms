@@ -89,6 +89,50 @@ class HashTableLinearProbing {
     return undefined; // {8}
   }
 
+  verifyRemoveSideEffect(key, removedPosition) {
+    const hash = this.hashCode(key); // {1}
+    let index = removedPosition + 1; // {2}
+
+    while (this.table[index] != null) { // {3}
+      const posHash = this.hashCode(this.table[index].key); // {4}
+      if (posHash <= hash || posHash <= removedPosition) { // {5}
+        this.table[removedPosition] = this.table[index]; // {6}
+        delete this.table[index];
+        removedPosition = index;
+      }
+
+      index++;
+    }
+  }
+
+  remove(key) {
+    const position = this.hashCode(key);
+
+    if (this.table[position] != null) {
+      if (this.table[position].key === key) {
+        delete this.table[position]; // {1}
+        this.verifyRemoveSideEffect(key, position); // {2}
+
+        return true;
+      }
+
+      let index = position + 1;
+
+      while (this.table[index] != null && this.table[index].key !== key) {
+        index++;
+      }
+
+      if (this.table[index] != null && this.table[index].key === key) {
+        delete this.table[index]; // {3}
+        this.verifyRemoveSideEffect(key, index); // {4}
+
+        return true;
+      }
+    }
+
+    return undefined;
+  }
+
   isEmpty() {
     return this.size() === 0;
   }
