@@ -43,21 +43,7 @@ class Node {
 class BinarySearchTree {
   constructor(compareFn = defaultCompare) {
     this.compareFn = compareFn;
-    this.root = null;
-  }
-
-  insertNode(node, key) {
-    if (this.compareFn(key, node.key) === Compare.LESS_THAN) { // {4}
-      if (node.left === null) { // {5}
-        node.left = new Node(key); // {6}
-      } else {
-        this.insertNode(node.left, key); // {7}
-      }
-    } else if (node.right === null) { // {8}
-      node.right = new Node(key); // {9}
-    } else {
-      this.insertNode(node.right, key); // {10}
-    }
+    this.root = undefined;
   }
 
   insert(key) {
@@ -66,6 +52,32 @@ class BinarySearchTree {
     } else {
       this.insertNode(this.root, key); // {3}
     }
+  }
+
+  insertNode(node, key) {
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) { // {4}
+      if (node.left == null) { // {5}
+        node.left = new Node(key); // {6}
+      } else {
+        this.insertNode(node.left, key); // {7}
+      }
+    } else if (node.right == null) { // {8}
+      node.right = new Node(key); // {9}
+    } else {
+      this.insertNode(node.right, key); // {10}
+    }
+  }
+
+  inOrderTraverseNode(node, callback) {
+    if (node != null) { // {2}
+      this.inOrderTraverseNode(node.left, callback); // {3}
+      callback(node.key); // {4}
+      this.inOrderTraverseNode(node.right, callback); // {5}
+    }
+  }
+
+  inOrderTraverse(callback) {
+    this.inOrderTraverseNode(this.root, callback); // {1}
   }
 }
 
@@ -86,3 +98,6 @@ tree.insert(20);
 tree.insert(18);
 tree.insert(25);
 tree.insert(6);
+
+const printNode = (value) => console.log(value); // {6}
+tree.inOrderTraverse(printNode); // {7}
