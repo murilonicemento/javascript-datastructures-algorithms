@@ -79,6 +79,18 @@ class BinarySearchTree {
   inOrderTraverse(callback) {
     this.inOrderTraverseNode(this.root, callback); // {1}
   }
+
+  postOrderTraverseNode(node, callback) {
+    if (node != null) {
+      this.postOrderTraverseNode(node.left, callback); // {1}
+      this.postOrderTraverseNode(node.right, callback); // {2}
+      callback(node.key); // {3}
+    }
+  }
+
+  postOrderTraverse(callback) {
+    this.postOrderTraverseNode(this.root, callback);
+  }
 }
 
 const tree = new BinarySearchTree();
