@@ -91,6 +91,20 @@ class BinarySearchTree {
   postOrderTraverse(callback) {
     this.postOrderTraverseNode(this.root, callback);
   }
+
+  minNode(node) {
+    let current = node;
+
+    while (current != null && current.left != null) { // {2}
+      current = current.left; // {3}
+    }
+
+    return current; // {4}
+  }
+
+  min() {
+    return this.minNode(this.root); // {1}
+  }
 }
 
 const tree = new BinarySearchTree();
