@@ -105,6 +105,20 @@ class BinarySearchTree {
   min() {
     return this.minNode(this.root); // {1}
   }
+
+  maxNode(node) {
+    let current = node;
+
+    while (current != null && current.right != null) {
+      current = current.right;
+    }
+
+    return current;
+  }
+
+  max() {
+    return this.maxNode(this.root);
+  }
 }
 
 const tree = new BinarySearchTree();
