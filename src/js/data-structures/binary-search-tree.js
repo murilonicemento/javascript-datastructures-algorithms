@@ -1,6 +1,5 @@
 // import { Compare, defaultCompare } from '../util';
 // import { Node } from './models/node';
-
 /**
  * • insert(key): esse método insere uma nova chave na árvore.
  * • search(key): esse método busca a chave na árvore e
@@ -119,6 +118,24 @@ class BinarySearchTree {
   max() {
     return this.maxNode(this.root);
   }
+
+  search(key) {
+    return this.searchNode(this.root, key); // {1}
+  }
+
+  searchNode(node, key) {
+    if (node == null) return false; // {2}
+
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) { // {3}
+      return this.searchNode(node.left, key); // {4}
+    }
+
+    if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) { // {5}
+      return this.searchNode(node.right, key); // {6}
+    }
+
+    return true; // {7}
+  }
 }
 
 const tree = new BinarySearchTree();
@@ -140,4 +157,8 @@ tree.insert(25);
 tree.insert(6);
 
 const printNode = (value) => console.log(value); // {6}
+
 tree.inOrderTraverse(printNode); // {7}
+
+console.log(tree.search(1) ? 'Key 1 found.' : 'Key 1 not found.');
+console.log(tree.search(8) ? 'Key 8 found.' : 'Key 8 not found.');
