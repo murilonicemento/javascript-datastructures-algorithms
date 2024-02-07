@@ -79,6 +79,18 @@ class BinarySearchTree {
     this.inOrderTraverseNode(this.root, callback); // {1}
   }
 
+  preOrderTraverse(callback) {
+    this.preOrderTraverseNode(this.root, callback);
+  }
+
+  preOrderTraverseNode(node, callback) {
+    if (node != null) {
+      callback(node.key);
+      this.preOrderTraverseNode(node.left, callback);
+      this.preOrderTraverseNode(node.right, callback);
+    }
+  }
+
   postOrderTraverseNode(node, callback) {
     if (node != null) {
       this.postOrderTraverseNode(node.left, callback); // {1}
@@ -178,6 +190,10 @@ class BinarySearchTree {
     node.right = this.removeNode(node.right, aux.key); // {20}
 
     return node; // {21}
+  }
+
+  getRoot() {
+    return this.root;
   }
 }
 
