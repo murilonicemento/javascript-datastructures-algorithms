@@ -136,6 +136,49 @@ class BinarySearchTree {
 
     return true; // {7}
   }
+
+  remove(key) {
+    return this.removeNode(this.root, key); // {1}
+  }
+
+  removeNode(node, key) {
+    if (node == null) return null; // {2}
+
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) { // {3}
+      node.left = this.removeNode(node.left, key); // {4}
+
+      return node; // {5}
+    }
+    if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) { // {6}
+      node.right = this.removeNode(node.right, key); // {7}
+
+      return node; // {8}
+    }
+
+    if (node.left == null && node.right == null) { // {9}
+      node = null; // {10}
+
+      return node; // {11}
+    }
+
+    if (node.left == null) { // {12}
+      node = node.right; // {13}
+
+      return node; // {14}
+    }
+
+    if (node.right == null) { // {15}
+      node = node.left; // {16}
+
+      return node; // {17}
+    }
+
+    const aux = this.minNode(node.right); // {18}
+    node.key = aux.key; // {19}
+    node.right = this.removeNode(node.right, aux.key); // {20}
+
+    return node; // {21}
+  }
 }
 
 const tree = new BinarySearchTree();
