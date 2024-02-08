@@ -238,6 +238,12 @@ class AVLTree extends BinarySearchTree {
 
     return tmp;
   }
+
+  rotationLR(node) {
+    node.left = this.rotationRR(node.left);
+
+    return this.rotationLR;
+  }
 }
 
 const avl = new AVLTree();
