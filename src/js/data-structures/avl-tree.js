@@ -222,6 +222,14 @@ class AVLTree extends BinarySearchTree {
         return BalanceFactor.BALANCED;
     }
   }
+
+  rotationLL(node) {
+    const tmp = node.left; // {1}
+    node.left = tmp.right; // {2}
+    tmp.right = node; // {3}
+
+    return tmp;
+  }
 }
 
 const avl = new AVLTree();
