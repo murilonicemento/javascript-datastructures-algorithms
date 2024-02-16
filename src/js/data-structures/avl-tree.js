@@ -287,6 +287,45 @@ class AVLTree extends BinarySearchTree {
 
     return node;
   }
+
+  removeNode(node, key) {
+    node = super.removeNode(node, key); // {1}
+
+    if (node == null) return node; // null, não é necessário balancear
+    // verifica se a árvore está balanceada
+    const balanceFactor = this.getBalanceFactor(node); // {2}
+
+    if (balanceFactor === BalanceFactor.UNBALANCED_LEFT) { // {3}
+      const balanceFactorLeft = this.getBalanceFactor(node.left); // {4}
+
+      if (
+        balanceFactorLeft === BalanceFactor.BALANCED
+        || balanceFactorLeft === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT
+      ) { // {5}
+        return this.rotationLL(node); // {6}
+      }
+
+      if (balanceFactorLeft === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT) { // {7}
+        return this.rotationLR(node.left); // {8}
+      }
+    }
+    if (balanceFactor === BalanceFactor.UNBALANCED_RIGHT) { // {9}
+      const balanceFactorRight = this.getBalanceFactor(node.right); // {10}
+
+      if (
+        balanceFactorRight === BalanceFactor.BALANCED
+        || balanceFactorRight === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT
+      ) { // {11}
+        return this.rotationRR(node); // {12}
+      }
+
+      if (balanceFactorRight === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT) { // {13}
+        return this.rotationRL(node.right); // {14}
+      }
+    }
+
+    return node;
+  }
 }
 
 const avl = new AVLTree();
