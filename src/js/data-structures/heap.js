@@ -78,6 +78,18 @@ class MinHeap {
       parent = this.getParentIndex(index); // {4}
     }
   }
+
+  size() {
+    return this.heap.length;
+  }
+
+  isEmpty() {
+    return this.size() === 0;
+  }
+
+  findMinimum() {
+    return this.isEmpty() ? undefined : this.heap[0]; // {1}
+  }
 }
 class MaxHeap extends MinHeap {
   constructor(compareFn = defaultCompare) {
@@ -95,5 +107,9 @@ minHeap.insert(3);
 minHeap.insert(4);
 minHeap.insert(5);
 minHeap.insert(1);
+
+console.log('Heap size: ', minHeap.size()); // 5
+console.log('Heap is empty: ', minHeap.isEmpty()); // false
+console.log('Heap min value: ', minHeap.findMinimum()); // 1
 
 console.log(maxHeap);
