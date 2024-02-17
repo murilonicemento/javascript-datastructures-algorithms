@@ -90,6 +90,42 @@ class MinHeap {
   findMinimum() {
     return this.isEmpty() ? undefined : this.heap[0]; // {1}
   }
+
+  extract() {
+    if (this.isEmpty()) return undefined; // {1}
+
+    if (this.size() === 1) return this.heap.shift(); // {2}
+
+    const removedValue = this.heap.shift(); // {3}
+    this.siftDown(0); // {4}
+
+    return removedValue; // {5}
+  }
+
+  siftDown(index) {
+    let element = index;
+    const left = this.getLeftIndex(index); // {1}
+    const right = this.getRightIndex(index); // {2}
+    const size = this.size();
+
+    if (left < size
+      && this.compareFn(this.heap[element], this.heap[left]) === Compare.BIGGER_THAN
+    ) { // {3}
+      element = left; // {4}
+    }
+
+    if (right < size
+      && this.compareFn(this.heap[element], this.heap[right]) === Compare.BIGGER_THAN
+    ) { // {5}
+      element = right; // {6}
+    }
+
+    if (index !== element) { // {7}
+      swap(this.heap, index, element); // {8}
+      this.siftDown(element); // {9}
+    }
+
+  }
 }
 class MaxHeap extends MinHeap {
   constructor(compareFn = defaultCompare) {
@@ -111,5 +147,10 @@ minHeap.insert(1);
 console.log('Heap size: ', minHeap.size()); // 5
 console.log('Heap is empty: ', minHeap.isEmpty()); // false
 console.log('Heap min value: ', minHeap.findMinimum()); // 1
+
+for (let i = 1; i < 10; i++) {
+  minHeap.insert(i);
+}
+console.log('Extract minimum: ', minHeap.extract()); // 1
 
 console.log(maxHeap);
