@@ -54,6 +54,30 @@ class MinHeap {
 
     return Math.floor((index - 1) / 2);
   }
+
+  insert(value) {
+    if (value != null) {
+      this.heap.push(value); // {1}
+      this.siftUp(this.heap.length - 1); // {2}
+
+      return true;
+    }
+
+    return false;
+  }
+
+  siftUp(index) {
+    let parent = this.getParentIndex(index); // {1}
+
+    while (
+      index > 0
+      && this.compareFn(this.heap[parent], this.heap[index]) > Compare.BIGGER_THAN
+    ) { // {2}
+      swap(this.heap, parent, index); // {3}
+      index = parent;
+      parent = this.getParentIndex(index); // {4}
+    }
+  }
 }
 class MaxHeap extends MinHeap {
   constructor(compareFn = defaultCompare) {
@@ -63,6 +87,13 @@ class MaxHeap extends MinHeap {
   }
 }
 
+const minHeap = new MinHeap();
 const maxHeap = new MaxHeap();
+
+minHeap.insert(2);
+minHeap.insert(3);
+minHeap.insert(4);
+minHeap.insert(5);
+minHeap.insert(1);
 
 console.log(maxHeap);
