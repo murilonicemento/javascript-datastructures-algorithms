@@ -71,7 +71,7 @@ class MinHeap {
 
     while (
       index > 0
-      && this.compareFn(this.heap[parent], this.heap[index]) > Compare.BIGGER_THAN
+      && this.compareFn(this.heap[parent], this.heap[index]) === Compare.BIGGER_THAN
     ) { // {2}
       swap(this.heap, parent, index); // {3}
       index = parent;
