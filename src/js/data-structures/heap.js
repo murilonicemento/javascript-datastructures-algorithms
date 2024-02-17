@@ -153,4 +153,10 @@ for (let i = 1; i < 10; i++) {
 }
 console.log('Extract minimum: ', minHeap.extract()); // 1
 
-console.log(maxHeap);
+maxHeap.insert(2);
+maxHeap.insert(3);
+maxHeap.insert(4);
+maxHeap.insert(5);
+maxHeap.insert(1);
+console.log('Heap size: ', maxHeap.size()); // 5
+console.log('Heap min value: ', maxHeap.findMinimum()); // 5
