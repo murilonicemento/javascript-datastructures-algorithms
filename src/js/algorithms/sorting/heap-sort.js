@@ -49,11 +49,11 @@ function buildMaxHeap(array, compareFn) {
 
 function heapSort(array, compareFn = defaultCompare) {
   let heapSize = array.length;
-  buildMaxHeap(array, compareFn);
+  buildMaxHeap(array, compareFn); // step 1
 
   while (heapSize > 1) {
-    swap(array, 0, --heapSize);
-    heapify(array, 0, heapSize, compareFn);
+    swap(array, 0, --heapSize); // step 2
+    heapify(array, 0, heapSize, compareFn); // step 3
   }
 
   return array;
