@@ -129,6 +129,12 @@ class Dictionary {
   }
 }
 
+const Colors = {
+  WHITE: 0,
+  GREY: 1,
+  BLACK: 2
+};
+
 class Graph {
   constructor(isDirected = false) {
     this.isDirected = isDirected; // {1}
