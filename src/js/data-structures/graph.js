@@ -166,13 +166,32 @@ class Graph {
   getAdjList() {
     return this.adjList;
   }
+
+  toString() {
+    let s = '';
+
+    for (let i = 0; i < this.vertices.length; i++) { // {15}
+      s += `${this.vertices[i]}`;
+      const neighbors = this.adjList.get(this.vertices[i]); // {16}
+
+      for (let j = 0; j < neighbors.length; j++) { // {17}
+        s += `${neighbors[j]}`;
+      }
+
+      s += '\n'; // {18}
+    }
+
+    return s;
+  }
 }
 
 const graph = new Graph();
 const myVertices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']; // {12}
+
 for (let i = 0; i < myVertices.length; i++) { // {13}
   graph.addVertex(myVertices[i]);
 }
+
 graph.addEdge('A', 'B'); // {14}
 graph.addEdge('A', 'C');
 graph.addEdge('A', 'D');
@@ -183,3 +202,5 @@ graph.addEdge('D', 'H');
 graph.addEdge('B', 'E');
 graph.addEdge('B', 'F');
 graph.addEdge('E', 'I');
+
+console.log(graph.toString());
