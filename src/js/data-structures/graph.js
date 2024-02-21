@@ -171,7 +171,7 @@ class Graph {
     let s = '';
 
     for (let i = 0; i < this.vertices.length; i++) { // {15}
-      s += `${this.vertices[i]} ->`;
+      s += `${this.vertices[i]} -> `;
       const neighbors = this.adjList.get(this.vertices[i]); // {16}
 
       for (let j = 0; j < neighbors.length; j++) { // {17}
