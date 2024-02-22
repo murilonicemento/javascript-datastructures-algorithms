@@ -1,7 +1,5 @@
 // import Queue from '../../data-structures/queue';
 
-const { version } = require("yargs");
-
 class Queue {
   constructor() {
     this.count = 0;
