@@ -1,5 +1,7 @@
 // import Queue from '../../data-structures/queue';
 
+const { version } = require("yargs");
+
 class Queue {
   constructor() {
     this.count = 0;
@@ -184,6 +186,62 @@ class Dictionary {
   }
 }
 
+class Stack {
+  constructor() {
+    this.count = 0;
+    this.items = {};
+  }
+
+  push(element) {
+    this.items[this.count] = element;
+    this.count++;
+  }
+
+  pop() {
+    if (this.isEmpty()) {
+      return undefined;
+    }
+    this.count--;
+    const result = this.items[this.count];
+    delete this.items[this.count];
+    return result;
+  }
+
+  peek() {
+    if (this.isEmpty()) {
+      return undefined;
+    }
+    return this.items[this.count - 1];
+  }
+
+  isEmpty() {
+    return this.count === 0;
+  }
+
+  size() {
+    return this.count;
+  }
+
+  clear() {
+    /* while (!this.isEmpty()) {
+        this.pop();
+      } */
+    this.items = {};
+    this.count = 0;
+  }
+
+  toString() {
+    if (this.isEmpty()) {
+      return '';
+    }
+    let objString = `${this.items[0]}`;
+    for (let i = 1; i < this.count; i++) {
+      objString = `${objString},${this.items[i]}`;
+    }
+    return objString;
+  }
+}
+
 class Graph {
   constructor(isDirected = false) {
     this.isDirected = isDirected; // {1}
@@ -346,3 +404,23 @@ breadthFirstSearch(graph, myVertices[0], printVertex);
 
 const shortestPathA = BFS(graph, myVertices[0]);
 console.log(shortestPathA);
+
+const fromVertex = myVertices[0]; // {9}
+
+for (let i = 1; i < myVertices.length; i++) { // {10}
+  const toVertex = myVertices[i]; // {11}
+  const path = new Stack(); // {12}
+
+  for (let v = toVertex; v !== fromVertex; v = shortestPathA.predecessor[v]) { // {13}
+    path.push(v); // {14}
+  }
+
+  path.push(fromVertex); // {15}
+  let s = path.pop(); // {16}
+
+  while (!path.isEmpty()) { // {17}
+    s += ` - ${path.pop()}`; // {18}
+  }
+
+  console.log(s); // {19}
+}
