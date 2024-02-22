@@ -286,6 +286,43 @@ const breadthFirstSearch = (graph, startVertex, callback) => {
   }
 };
 
+const BFS = (graph, startVertex) => {
+  const vertices = graph.getVertices();
+  const adjList = graph.getAdjList();
+  const color = initializeColor(vertices);
+  const queue = new Queue();
+  const distance = {}; // {1}
+  const predecessor = {}; // {2}
+
+  queue.enqueue(startVertex);
+
+  for (let i = 0; i < vertices.length; i++) { // {3}
+    distance[vertices[i]] = 0; // {4}
+    predecessor[vertices[i]] = null; // {5}
+  }
+
+  while (!queue.isEmpty()) {
+    const u = queue.dequeue();
+    const neighbors = adjList.get(u);
+    color[u] = Colors.GREY;
+
+    for (let i = 0; i < neighbors.length; i++) {
+      const w = neighbors[i];
+
+      if (color[w] === Colors.WHITE) {
+        color[w] = Colors.GREY;
+        distance[w] = distance[u] + 1; // {6}
+        predecessor[w] = u; // {7}
+        queue.enqueue(w);
+      }
+    }
+
+    color[u] = color.BLACK;
+  }
+
+  return { distance, predecessor }; // {8}
+};
+
 const graph = new Graph();
 const myVertices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']; // {12}
 
@@ -306,3 +343,6 @@ graph.addEdge('E', 'I');
 
 const printVertex = (value) => console.log(`Visited vertex: ${value}`); // {15}
 breadthFirstSearch(graph, myVertices[0], printVertex);
+
+const shortestPathA = BFS(graph, myVertices[0]);
+console.log(shortestPathA);
