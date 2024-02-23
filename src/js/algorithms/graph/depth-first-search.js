@@ -93,4 +93,4 @@ const DFS = graph => {
   };
 };
 
-export { depthFirstSearch };
+export { DFS, depthFirstSearch };
