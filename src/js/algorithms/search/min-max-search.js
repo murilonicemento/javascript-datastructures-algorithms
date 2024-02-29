@@ -1,4 +1,4 @@
-import { defaultCompare, Compare } from '../../util';
+import { Compare, defaultCompare } from '../../util';
 
 export function findMaxValue(array, compareFn = defaultCompare) {
   if (array && array.length > 0) {
@@ -12,6 +12,7 @@ export function findMaxValue(array, compareFn = defaultCompare) {
   }
   return undefined;
 }
+
 export function findMinValue(array, compareFn = defaultCompare) {
   if (array && array.length > 0) {
     let min = array[0];
