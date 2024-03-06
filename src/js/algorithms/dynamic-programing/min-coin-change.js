@@ -19,7 +19,7 @@ function minCoinChange(coins, amount) {
         && (newMin.length || !newAmount)// {10}
       ) {
         min = [coin].concat(newMin); // {11}
-        // console.log('new Min ' + min + ' for ' + amount);
+        // console.log(`new Min ${min} for ${amount}`);
       }
     }
     return (cache[value] = min); // {12}
